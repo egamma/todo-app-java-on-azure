@@ -1,0 +1,173 @@
+# login your Azure CLI, and set your subscription id
+az login
+az account set -s 2e62fb5f-4d5d-432f-b89c-85368ba3b878   # 'Java Demos'
+
+# create an Azure Resource Group, and note your group name
+az group create -n <your-azure-group-name> -l <your-resource-group-region>
+
+az group create -n springone-demo-resource-group -l westus
+
+# {
+#   "id": "/subscriptions/2e62fb5f-4d5d-432f-b89c-85368ba3b878/resourceGroups/springone-demo-resource-group",
+#   "location": "westus",
+#   "managedBy": null,
+#   "name": "springone-demo-resource-group",
+#   "properties": {
+#     "provisioningState": "Succeeded"
+#   },
+#   "tags": null
+# }
+
+# create Azure Cosmos DB with DocumentDB kind. Note the documentEndpoint field in the response
+az cosmosdb create --kind GlobalDocumentDB -g <your-azure-group-name> -n <your-azure-documentDB-name>
+
+az cosmosdb create --kind GlobalDocumentDB -g springone-demo-resource-group -n springone-demo-db
+# {
+#   "consistencyPolicy": {
+#     "defaultConsistencyLevel": "Session",
+#     "maxIntervalInSeconds": 5,
+#     "maxStalenessPrefix": 100
+#   },
+#   "databaseAccountOfferType": "Standard",
+#   "documentEndpoint": "https://springone-demo-db.documents.azure.com:443/",
+#   "enableAutomaticFailover": false,
+#   "failoverPolicies": [
+#     {
+#       "failoverPriority": 0,
+#       "id": "springone-demo-db-westus",
+#       "locationName": "West US"
+#     }
+#   ],
+#   "id": "/subscriptions/2e62fb5f-4d5d-432f-b89c-85368ba3b878/resourceGroups/springone-demo-resource-group/providers/Microsoft.DocumentDB/databaseAccounts/springone-demo-db",
+#   "ipRangeFilter": "",
+#   "kind": "GlobalDocumentDB",
+#   "location": "West US",
+#   "name": "springone-demo-db",
+#   "provisioningState": "Succeeded",
+#   "readLocations": [
+#     {
+#       "documentEndpoint": "https://springone-demo-db-westus.documents.azure.com:443/",
+#       "failoverPriority": 0,
+#       "id": "springone-demo-db-westus",
+#       "locationName": "West US",
+#       "provisioningState": "Succeeded"
+#     }
+#   ],
+#   "resourceGroup": "springone-demo-resource-group",
+#   "tags": {},
+#   "type": "Microsoft.DocumentDB/databaseAccounts",
+#   "writeLocations": [
+#     {
+#       "documentEndpoint": "https://springone-demo-db-westus.documents.azure.com:443/",
+#       "failoverPriority": 0,
+#       "id": "springone-demo-db-westus",
+#       "locationName": "West US",
+#       "provisioningState": "Succeeded"
+#     }
+#   ]
+# }
+
+# get your Azure Cosmos DB key, get the primaryMasterKey of the DocumentDB you just created.
+
+az cosmosdb list-keys -g <your-azure-group-name> -n <your-azure-documentDB-name>
+
+az cosmosdb list-keys -g springone-demo-resource-group -n springone-demo-db
+# {
+#   "primaryMasterKey": "chkpkekiQ6cSi84DKkkelc1xedgvPqCKPhOjH2oKU9SLveHmnLLA1HZZzdFz5vIuH3bGZw5y0vbKplxYrP0IEA==",
+#   "primaryReadonlyMasterKey": "6q6M5oW6CdqfmW6vS6SblrNm3aeaHYD6tq4IAa6dSLkx2yFV7bJaNHKhgE0KhwwqatXOVkVmdaJP6562EeKUvA==",
+#   "secondaryMasterKey": "5LkWSRk6HwMaAogFR2Dcci5TlyhxFEvsDxY5qd1eUKM62RdkbGnpeEFW2t4cXucsQhFi0MwILe4Cd9Kb2Qkeuw==",
+#   "secondaryReadonlyMasterKey": "GpHlSnSOoexczF3Fn9Yl06n6g82bnEtF5ASeQAvsNR2baIHtxVUBFSPx0saRDRPUs9gkgXARBJrwlM0BXmppIQ=="
+# }
+
+application.properties
+# azure.documentdb.uri=https://springone-demo-db.documents.azure.com:443/
+# azure.documentdb.key=chkpkekiQ6cSi84DKkkelc1xedgvPqCKPhOjH2oKU9SLveHmnLLA1HZZzdFz5vIuH3bGZw5y0vbKplxYrP0IEA==
+# azure.documentdb.database=springone-todo-db
+
+https://github.com/Microsoft/todo-app-java-on-azure/blob/master/doc/deployment/deploy-to-azure-web-app-using-maven-plugin.md
+
+# Run below command to create an Azure Container Registry. After creation, use login server as Container Registry URL in the next section
+# where `<sku-name>` is one of the following: `{Basic,Managed_Basic,Managed_Standard,Managed_Premium}`
+az acr create -n <your-registry-name> -g <your-resource-group-name> --sku <sku-name>
+
+az acr create -n springonedemoregistry -g springone-demo-resource-group --sku Basic
+# {
+#   "adminUserEnabled": false,
+#   "creationDate": "2017-11-14T10:37:34.445931+00:00",
+#   "id": "/subscriptions/2e62fb5f-4d5d-432f-b89c-85368ba3b878/resourceGroups/springone-demo-resource-group/providers/Microsoft.ContainerRegistry/registries/springonedemoregistry",
+#   "location": "westus",
+#   "loginServer": "springonedemoregistry.azurecr.io",
+#   "name": "springonedemoregistry",
+#   "provisioningState": "Succeeded",
+#   "resourceGroup": "springone-demo-resource-group",
+#   "sku": {
+#     "name": "Basic",
+#     "tier": "Basic"
+#   },
+#   "status": null,
+#   "storageAccount": null,
+#   "tags": {},
+#   "type": "Microsoft.ContainerRegistry/registries"
+# }
+
+# Run below command to show your Azure Container Registry credentials. You will use Docker registry username and password in the next section.
+az acr credential show -n <your-registry-name>
+
+# have to run this first
+az acr update -n springonedemoregistry --admin-enabled true
+
+az acr credential show -n springonedemoregistry
+# {
+#   "passwords": [
+#     {
+#       "name": "password",
+#       "value": "6S9CqVYK1N+n1uxdhLRAyAVeDBqOsmLl"
+#     },
+#     {
+#       "name": "password2",
+#       "value": "8kZX1ORu0alZ8qXDpcrEpT6UXOcbPj=0"
+#     }
+#   ],
+#   "username": "springonedemoregistry"
+# }
+
+# In the Maven settings file ~/.m2/settings.xml, add a new <server> element with your Azure Container Registry credentials from previous steps.
+# or the install file /usr/local/Cellar/maven/3.5.2/libexec/conf
+# configure a spring server
+
+    <server>
+      <id>springonedemoregistry.azurecr.io</id>
+      <username>springonedemoregistry</username>
+      <password>6S9CqVYK1N+n1uxdhLRAyAVeDBqOsmLl</password>
+      <configuration>
+        <email>egamma@microsoft.com</email>
+      </configuration>
+    </server>
+
+
+# cleans, compiles, creates jar run tests, dockerizes - creates an image, pushes the image to the azure container registry 
+mvn clean package docker:build docker:push    # do this off line
+
+# deploys the image in azure container registry as a web app
+mvn azure-webapp:deploy # focus on this step
+
+# [INFO] <-- END HTTP
+# [INFO] Target Web App doesn't exist. Creating a new one...
+# [INFO] Successfully created Web App
+# [INFO] No resources specified in pom.xml. Skip artifacts deployment.
+# [INFO] Successfully deployed Web App at https://todo-app-171114113817442.azurewebsites.net
+# [INFO] ------------------------------------------------------------------------
+# [INFO] BUILD SUCCESS
+# [INFO] ------------------------------------------------------------------------
+# [INFO] Total time: 01:28 min
+# [INFO] Finished at: 2017-11-14T12:39:46+01:00
+# [INFO] Final Memory: 53M/433M
+# [INFO] ------------------------------------------------------------------------
+
+# app => https://todo-app-171114113817442.azurewebsites.net
+
+# the sample was created from this one
+https://github.com/Microsoft/azure-spring-boot/tree/master/azure-spring-boot-samples/azure-documentdb-spring-boot-sample
+
+# publish to PCF
+

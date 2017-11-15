@@ -4,6 +4,17 @@
  * license information.
  */
 
+ //@ts-check
+
+/**
+ * @param a {number} - A string param declared using TS-style
+ * @param b {number} 
+ * @return {number} This is the result
+ */
+function test(a, b) {
+    return a+b;
+}
+
 'use strict';
 angular.module('todoApp')
     .factory('todoListSvc', ['$http', function ($http) {

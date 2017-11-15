@@ -1,0 +1,3 @@
+azure.documentdb.uri=https://springone-demo-db.documents.azure.com:443/
+azure.documentdb.key=chkpkekiQ6cSi84DKkkelc1xedgvPqCKPhOjH2oKU9SLveHmnLLA1HZZzdFz5vIuH3bGZw5y0vbKplxYrP0IEA==
+azure.documentdb.database=springone-todo-db

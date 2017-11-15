@@ -1,0 +1,8 @@
+{
+  "name": "todo-app",
+  "version": "1.0.0",
+  "description": "a sample todo app for the spring one demo",
+  "devDependencies": {
+    "@types/angular": "^1.6.39"
+  }
+}
