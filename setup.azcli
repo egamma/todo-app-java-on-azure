@@ -171,3 +171,37 @@ https://github.com/Microsoft/azure-spring-boot/tree/master/azure-spring-boot-sam
 
 # publish to PCF
 
+
+# cleaning up the workspace when there are class path problems
+
+- open the log file: Java Open Server Log file
+- file is located in the workspace storage -> /Users/egamma/Library/Application Support/Code - Insiders/User/workspaceStorage/
+- delete the redhat.java folder
+
+
+# debug locally
+
+build the application
+
+mvn package
+
+
+launch the application
+java -Xdebug \
+  -Xrunjdwp:server=y,transport=dt_socket,address=8000,suspend=n \
+  -jar target/todo-app-java-on-azure-1.0-SNAPSHOT.jar
+
+# deploy to azure
+# cleans, compiles, creates jar run tests, dockerizes - creates an image, pushes the image to the azure container registry 
+mvn clean package docker:build docker:push    # do this off line
+
+# deploys the image in azure container registry as a web app
+mvn azure-webapp:deploy # focus on this step
+
+# deploy to PCF
+mvn cf:login -D cf.username=erich -D cf.password=gamma
+mvn cf:push
+
+To Do Items
+- Refresh Java Skills
+- Learn Java9 Modules

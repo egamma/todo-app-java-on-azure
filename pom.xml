@@ -138,6 +138,11 @@
                     <org>springone2017</org>
                     <space>keynote</space>
                     <appname>${azure.app.name}</appname>
+                    <services>
+                        <service>
+                            <name>bogus</name>
+                        </service>
+                    </services>
                 </configuration>
             </plugin>
             <plugin>
