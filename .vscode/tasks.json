@@ -21,6 +21,30 @@
             "type": "shell",
             "command": "java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8000,suspend=n -jar target/todo-app-java-on-azure-1.0-SNAPSHOT.jar",
             "problemMatcher": []
+        },
+        {
+            "label": "docker build and push",
+            "type": "shell",
+            "command": "mvn clean package docker:build docker:push",
+            "problemMatcher": []
+        },
+        {
+            "label": "deploy webapp",
+            "type": "shell",
+            "command": "mvn azure-webapp:deploy",
+            "problemMatcher": []
+        },
+        {
+            "label": "login in cloud foundry",
+            "type": "shell",
+            "command": "mvn cf:login -D cf.username=erich -D cf.password=gamma",
+            "problemMatcher": []
+        },
+        {
+            "label": "push to cloud foundary",
+            "type": "shell",
+            "command": "mvn cf:push",
+            "problemMatcher": []
         }
     ]
 }
