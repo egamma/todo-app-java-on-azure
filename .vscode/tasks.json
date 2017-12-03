@@ -1,0 +1,26 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "test",
+            "type": "shell",
+            "command": "mvn -B test",
+            "group": "test"
+        },
+        {
+            "label": "package",
+            "type": "shell",
+            "command": "mvn package",
+            "problemMatcher": [],
+            "group": "build" 
+        },
+        {
+            "label": "start server",
+            "type": "shell",
+            "command": "java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8000,suspend=n -jar target/todo-app-java-on-azure-1.0-SNAPSHOT.jar",
+            "problemMatcher": []
+        }
+    ]
+}
