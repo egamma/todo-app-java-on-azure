@@ -205,3 +205,9 @@ mvn cf:push
 To Do Items
 - Refresh Java Skills
 - Learn Java9 Modules
+
+Features
+- Intellisense
+- CodeLense references java
+- GitLens
+- Tasks for Maven
