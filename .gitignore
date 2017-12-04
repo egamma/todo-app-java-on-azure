@@ -17,6 +17,7 @@ node_modules
 .project
 .settings
 .springBeans
+.sts4-cache
 
 ### IntelliJ IDEA ###
 .idea

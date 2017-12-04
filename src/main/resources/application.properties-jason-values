@@ -1,3 +1,0 @@
-azure.documentdb.uri=https://todo-app-db-westus.documents.azure.com:443/
-azure.documentdb.key=73vFAQffkjvEupAXPDjqic33x0HX5LhlQjPjj2822BovjwBne4VqjH0E5XxUnSXAX4wKxruKCoIopEnV1iyx3w==
-azure.documentdb.database=todo
