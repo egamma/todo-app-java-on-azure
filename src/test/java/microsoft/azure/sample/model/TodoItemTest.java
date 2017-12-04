@@ -16,7 +16,6 @@ public class TodoItemTest {
 
     @Test
     public void testFinished() {
-        assertThat(item.isFinished(), is(not(true)));
         item.setFinish(true);
         assertThat(item.isFinished(), is(true));
     }

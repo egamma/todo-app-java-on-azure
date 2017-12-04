@@ -5,8 +5,8 @@ npm install @types/angular
 ## debug
 mvn package
 java -Xdebug \
->   -Xrunjdwp:server=y,transport=dt_socket,address=8000,suspend=n \
->   -jar target/todo-app-java-on-azure-1.0-SNAPSHOT.jar
+   -Xrunjdwp:server=y,transport=dt_socket,address=8000,suspend=n \
+   -jar target/todo-app-java-on-azure-1.0-SNAPSHOT.jar
 Listening for transport dt_socket at address: 8000
 
 why no launch configuration and only attach?
@@ -45,7 +45,6 @@ Backend
     cmd-shift-o symbols in documents
     cmd-shift-o/ all request mappings/end points
 - Goto the post endPoint
-    - show intellisense
     - extract method
 - cmd-hover over ToDo item
     - code lense for search method is used in 2 other methods
