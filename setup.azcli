@@ -207,7 +207,7 @@ To Do Items
 - Learn Java9 Modules
 
 Features
-- Intellisense
-- CodeLense references java
-- GitLens
-- Tasks for Maven
+/- Intellisense
+/- CodeLense references java
+/- GitLens
+/- Tasks for Maven
