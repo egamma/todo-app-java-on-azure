@@ -19,6 +19,7 @@ why no launch configuration and only attach?
 - Inside the app
     - angular frontend, spring restController provides access to an azure Cosmos DB
         Cosmos noSQL, document db, understands the mongo API
+    - created from a spring starter, adds Azure Cosmose DB, there are many azure spring starters available now
 
 - Show the extensions
     - Java extensions -> Java extension pack
